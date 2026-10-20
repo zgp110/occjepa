@@ -1,0 +1,10 @@
+torch>=2.1
+torchvision
+timm
+einops
+numpy
+opencv-python
+pillow
+pycocotools
+requests
+imageio-ffmpeg

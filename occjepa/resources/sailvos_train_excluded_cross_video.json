@@ -1,0 +1,1905 @@
+{
+ "rule": "drop a sequence iff its 25 image_file_names lie in > 1 video folder (first path component)",
+ "reason": "official train.json video_id collisions (139: family_2_mcs_3/family_5_mcs_3, 217: low_drv_ext/low_pho_int, 243: mp_intro_mcs_8_a1_cc/mph_hum_key_mcs1): Diffusion-VAS grouped by (video_id, obj_id) and interleaved frames of two videos; decision of main (phase 2): drop them",
+ "n_sequences": 15805,
+ "n_dropped": 117,
+ "n_kept": 15688,
+ "dropped_by_video_pair": {
+  "family_2_mcs_3 + family_5_mcs_3": 71,
+  "low_drv_ext + low_pho_int": 7,
+  "mp_intro_mcs_8_a1_cc + mph_hum_key_mcs1": 39
+ },
+ "duplicate_key_occurrences_before": 1240,
+ "duplicate_key_occurrences_after": 0,
+ "exact_duplicate_sequences_before": 7,
+ "exact_duplicate_sequences_after": 0,
+ "n_first_folders_all": 160,
+ "n_first_folders_kept": 155,
+ "folders_lost_by_drop": [
+  "family_2_mcs_3",
+  "family_5_mcs_3",
+  "low_pho_int",
+  "mp_intro_mcs_8_a1_cc",
+  "mph_hum_key_mcs1"
+ ],
+ "drop_seq_indices": [
+  5949,
+  5950,
+  5951,
+  5952,
+  5953,
+  5954,
+  5955,
+  5956,
+  5957,
+  5958,
+  5959,
+  5960,
+  5961,
+  5962,
+  5963,
+  5964,
+  5965,
+  5966,
+  5967,
+  5968,
+  5969,
+  5970,
+  5971,
+  5972,
+  5973,
+  5974,
+  5975,
+  5976,
+  5977,
+  5978,
+  5979,
+  5980,
+  5981,
+  5982,
+  5983,
+  9799,
+  9800,
+  9801,
+  9802,
+  10370,
+  10371,
+  10372,
+  10373,
+  10374,
+  10375,
+  10376,
+  10377,
+  10378,
+  10379,
+  10380,
+  10381,
+  10382,
+  10383,
+  10384,
+  10385,
+  10386,
+  10387,
+  10388,
+  10389,
+  15413,
+  15414,
+  15415,
+  15416,
+  15417,
+  15418,
+  15419,
+  15420,
+  15421,
+  15422,
+  15423,
+  15424,
+  15425,
+  15426,
+  15427,
+  15428,
+  15429,
+  15430,
+  15431,
+  15432,
+  15433,
+  15434,
+  15435,
+  15436,
+  15437,
+  15438,
+  15439,
+  15440,
+  15441,
+  15442,
+  15443,
+  15444,
+  15445,
+  15446,
+  15447,
+  15448,
+  15449,
+  15450,
+  15451,
+  15600,
+  15601,
+  15602,
+  15603,
+  15604,
+  15605,
+  15606,
+  15607,
+  15608,
+  15609,
+  15610,
+  15611,
+  15612,
+  15613,
+  15614,
+  15615,
+  15616,
+  15617,
+  15618
+ ],
+ "drop_seq_indices_sha1": "0b8a493c20d7a79de9aa7b149b2cd7d20292f754",
+ "dropped": [
+  {
+   "seq": 5949,
+   "obj_id": 1,
+   "category_id": 1,
+   "first_folder": "family_5_mcs_3",
+   "folders": {
+    "family_5_mcs_3": 13,
+    "family_2_mcs_3": 12
+   },
+   "image_ids_first_last": [
+    32953,
+    32965
+   ],
+   "n_distinct_keys": 25
+  },
+  {
+   "seq": 5950,
+   "obj_id": 1,
+   "category_id": 1,
+   "first_folder": "family_2_mcs_3",
+   "folders": {
+    "family_2_mcs_3": 13,
+    "family_5_mcs_3": 12
+   },
+   "image_ids_first_last": [
+    81225,
+    81237
+   ],
+   "n_distinct_keys": 25
+  },
+  {
+   "seq": 5951,
+   "obj_id": 1,
+   "category_id": 1,
+   "first_folder": "family_5_mcs_3",
+   "folders": {
+    "family_5_mcs_3": 13,
+    "family_2_mcs_3": 12
+   },
+   "image_ids_first_last": [
+    32978,
+    32990
+   ],
+   "n_distinct_keys": 25
+  },
+  {
+   "seq": 5952,
+   "obj_id": 1,
+   "category_id": 1,
+   "first_folder": "family_2_mcs_3",
+   "folders": {
+    "family_2_mcs_3": 13,
+    "family_5_mcs_3": 12
+   },
+   "image_ids_first_last": [
+    81250,
+    81262
+   ],
+   "n_distinct_keys": 25
+  },
+  {
+   "seq": 5953,
+   "obj_id": 1,
+   "category_id": 1,
+   "first_folder": "family_5_mcs_3",
+   "folders": {
+    "family_5_mcs_3": 13,
+    "family_2_mcs_3": 12
+   },
+   "image_ids_first_last": [
+    33007,
+    33019
+   ],
+   "n_distinct_keys": 25
+  },
+  {
+   "seq": 5954,
+   "obj_id": 1,
+   "category_id": 1,
+   "first_folder": "family_2_mcs_3",
+   "folders": {
+    "family_2_mcs_3": 13,
+    "family_5_mcs_3": 12
+   },
+   "image_ids_first_last": [
+    81279,
+    81291
+   ],
+   "n_distinct_keys": 25
+  },
+  {
+   "seq": 5955,
+   "obj_id": 1,
+   "category_id": 1,
+   "first_folder": "family_5_mcs_3",
+   "folders": {
+    "family_5_mcs_3": 13,
+    "family_2_mcs_3": 12
+   },
+   "image_ids_first_last": [
+    33032,
+    33044
+   ],
+   "n_distinct_keys": 25
+  },
+  {
+   "seq": 5956,
+   "obj_id": 1,
+   "category_id": 1,
+   "first_folder": "family_5_mcs_3",
+   "folders": {
+    "family_5_mcs_3": 13,
+    "family_2_mcs_3": 12
+   },
+   "image_ids_first_last": [
+    33045,
+    33057
+   ],
+   "n_distinct_keys": 25
+  },
+  {
+   "seq": 5957,
+   "obj_id": 1,
+   "category_id": 1,
+   "first_folder": "family_2_mcs_3",
+   "folders": {
+    "family_2_mcs_3": 13,
+    "family_5_mcs_3": 12
+   },
+   "image_ids_first_last": [
+    81317,
+    81329
+   ],
+   "n_distinct_keys": 25
+  },
+  {
+   "seq": 5958,
+   "obj_id": 1,
+   "category_id": 1,
+   "first_folder": "family_5_mcs_3",
+   "folders": {
+    "family_5_mcs_3": 13,
+    "family_2_mcs_3": 12
+   },
+   "image_ids_first_last": [
+    33070,
+    33082
+   ],
+   "n_distinct_keys": 25
+  },
+  {
+   "seq": 5959,
+   "obj_id": 1,
+   "category_id": 1,
+   "first_folder": "family_2_mcs_3",
+   "folders": {
+    "family_2_mcs_3": 13,
+    "family_5_mcs_3": 12
+   },
+   "image_ids_first_last": [
+    81342,
+    81354
+   ],
+   "n_distinct_keys": 25
+  },
+  {
+   "seq": 5960,
+   "obj_id": 5,
+   "category_id": 1,
+   "first_folder": "family_2_mcs_3",
+   "folders": {
+    "family_2_mcs_3": 13,
+    "family_5_mcs_3": 12
+   },
+   "image_ids_first_last": [
+    81342,
+    81354
+   ],
+   "n_distinct_keys": 25
+  },
+  {
+   "seq": 5961,
+   "obj_id": 1,
+   "category_id": 1,
+   "first_folder": "family_5_mcs_3",
+   "folders": {
+    "family_5_mcs_3": 13,
+    "family_2_mcs_3": 12
+   },
+   "image_ids_first_last": [
+    33095,
+    33107
+   ],
+   "n_distinct_keys": 25
+  },
+  {
+   "seq": 5962,
+   "obj_id": 5,
+   "category_id": 1,
+   "first_folder": "family_5_mcs_3",
+   "folders": {
+    "family_5_mcs_3": 13,
+    "family_2_mcs_3": 12
+   },
+   "image_ids_first_last": [
+    33095,
+    33107
+   ],
+   "n_distinct_keys": 25
+  },
+  {
+   "seq": 5963,
+   "obj_id": 1,
+   "category_id": 1,
+   "first_folder": "family_5_mcs_3",
+   "folders": {
+    "family_5_mcs_3": 13,
+    "family_2_mcs_3": 12
+   },
+   "image_ids_first_last": [
+    33115,
+    33127
+   ],
+   "n_distinct_keys": 25
+  },
+  {
+   "seq": 5964,
+   "obj_id": 1,
+   "category_id": 1,
+   "first_folder": "family_2_mcs_3",
+   "folders": {
+    "family_2_mcs_3": 13,
+    "family_5_mcs_3": 12
+   },
+   "image_ids_first_last": [
+    81387,
+    81399
+   ],
+   "n_distinct_keys": 25
+  },
+  {
+   "seq": 5965,
+   "obj_id": 1,
+   "category_id": 1,
+   "first_folder": "family_5_mcs_3",
+   "folders": {
+    "family_5_mcs_3": 13,
+    "family_2_mcs_3": 12
+   },
+   "image_ids_first_last": [
+    33151,
+    33163
+   ],
+   "n_distinct_keys": 25
+  },
+  {
+   "seq": 5966,
+   "obj_id": 5,
+   "category_id": 1,
+   "first_folder": "family_5_mcs_3",
+   "folders": {
+    "family_5_mcs_3": 13,
+    "family_2_mcs_3": 12
+   },
+   "image_ids_first_last": [
+    33151,
+    33163
+   ],
+   "n_distinct_keys": 25
+  },
+  {
+   "seq": 5967,
+   "obj_id": 1,
+   "category_id": 1,
+   "first_folder": "family_2_mcs_3",
+   "folders": {
+    "family_2_mcs_3": 13,
+    "family_5_mcs_3": 12
+   },
+   "image_ids_first_last": [
+    81423,
+    81435
+   ],
+   "n_distinct_keys": 25
+  },
+  {
+   "seq": 5968,
+   "obj_id": 5,
+   "category_id": 1,
+   "first_folder": "family_2_mcs_3",
+   "folders": {
+    "family_2_mcs_3": 13,
+    "family_5_mcs_3": 12
+   },
+   "image_ids_first_last": [
+    81423,
+    81435
+   ],
+   "n_distinct_keys": 25
+  },
+  {
+   "seq": 5969,
+   "obj_id": 1,
+   "category_id": 1,
+   "first_folder": "family_5_mcs_3",
+   "folders": {
+    "family_5_mcs_3": 13,
+    "family_2_mcs_3": 12
+   },
+   "image_ids_first_last": [
+    33226,
+    33238
+   ],
+   "n_distinct_keys": 25
+  },
+  {
+   "seq": 5970,
+   "obj_id": 1,
+   "category_id": 1,
+   "first_folder": "family_2_mcs_3",
+   "folders": {
+    "family_2_mcs_3": 13,
+    "family_5_mcs_3": 12
+   },
+   "image_ids_first_last": [
+    81498,
+    81510
+   ],
+   "n_distinct_keys": 25
+  },
+  {
+   "seq": 5971,
+   "obj_id": 1,
+   "category_id": 1,
+   "first_folder": "family_5_mcs_3",
+   "folders": {
+    "family_5_mcs_3": 13,
+    "family_2_mcs_3": 12
+   },
+   "image_ids_first_last": [
+    33251,
+    33263
+   ],
+   "n_distinct_keys": 25
+  },
+  {
+   "seq": 5972,
+   "obj_id": 1,
+   "category_id": 1,
+   "first_folder": "family_2_mcs_3",
+   "folders": {
+    "family_2_mcs_3": 13,
+    "family_5_mcs_3": 12
+   },
+   "image_ids_first_last": [
+    81523,
+    81535
+   ],
+   "n_distinct_keys": 25
+  },
+  {
+   "seq": 5973,
+   "obj_id": 1,
+   "category_id": 1,
+   "first_folder": "family_5_mcs_3",
+   "folders": {
+    "family_5_mcs_3": 13,
+    "family_2_mcs_3": 12
+   },
+   "image_ids_first_last": [
+    33286,
+    33298
+   ],
+   "n_distinct_keys": 25
+  },
+  {
+   "seq": 5974,
+   "obj_id": 1,
+   "category_id": 1,
+   "first_folder": "family_2_mcs_3",
+   "folders": {
+    "family_2_mcs_3": 13,
+    "family_5_mcs_3": 12
+   },
+   "image_ids_first_last": [
+    81558,
+    81570
+   ],
+   "n_distinct_keys": 25
+  },
+  {
+   "seq": 5975,
+   "obj_id": 1,
+   "category_id": 1,
+   "first_folder": "family_5_mcs_3",
+   "folders": {
+    "family_5_mcs_3": 13,
+    "family_2_mcs_3": 12
+   },
+   "image_ids_first_last": [
+    33311,
+    33323
+   ],
+   "n_distinct_keys": 25
+  },
+  {
+   "seq": 5976,
+   "obj_id": 1,
+   "category_id": 1,
+   "first_folder": "family_2_mcs_3",
+   "folders": {
+    "family_2_mcs_3": 13,
+    "family_5_mcs_3": 12
+   },
+   "image_ids_first_last": [
+    81583,
+    81595
+   ],
+   "n_distinct_keys": 25
+  },
+  {
+   "seq": 5977,
+   "obj_id": 1,
+   "category_id": 1,
+   "first_folder": "family_5_mcs_3",
+   "folders": {
+    "family_5_mcs_3": 13,
+    "family_2_mcs_3": 12
+   },
+   "image_ids_first_last": [
+    33336,
+    33348
+   ],
+   "n_distinct_keys": 25
+  },
+  {
+   "seq": 5978,
+   "obj_id": 1,
+   "category_id": 1,
+   "first_folder": "family_2_mcs_3",
+   "folders": {
+    "family_2_mcs_3": 13,
+    "family_5_mcs_3": 12
+   },
+   "image_ids_first_last": [
+    81608,
+    81620
+   ],
+   "n_distinct_keys": 25
+  },
+  {
+   "seq": 5979,
+   "obj_id": 1,
+   "category_id": 1,
+   "first_folder": "family_2_mcs_3",
+   "folders": {
+    "family_2_mcs_3": 13,
+    "family_5_mcs_3": 12
+   },
+   "image_ids_first_last": [
+    81633,
+    81645
+   ],
+   "n_distinct_keys": 25
+  },
+  {
+   "seq": 5980,
+   "obj_id": 4,
+   "category_id": 1,
+   "first_folder": "family_5_mcs_3",
+   "folders": {
+    "family_5_mcs_3": 13,
+    "family_2_mcs_3": 12
+   },
+   "image_ids_first_last": [
+    33397,
+    33409
+   ],
+   "n_distinct_keys": 25
+  },
+  {
+   "seq": 5981,
+   "obj_id": 1,
+   "category_id": 1,
+   "first_folder": "family_5_mcs_3",
+   "folders": {
+    "family_5_mcs_3": 13,
+    "family_2_mcs_3": 12
+   },
+   "image_ids_first_last": [
+    33447,
+    33459
+   ],
+   "n_distinct_keys": 25
+  },
+  {
+   "seq": 5982,
+   "obj_id": 1,
+   "category_id": 1,
+   "first_folder": "family_2_mcs_3",
+   "folders": {
+    "family_2_mcs_3": 13,
+    "family_5_mcs_3": 12
+   },
+   "image_ids_first_last": [
+    81719,
+    81731
+   ],
+   "n_distinct_keys": 25
+  },
+  {
+   "seq": 5983,
+   "obj_id": 1,
+   "category_id": 1,
+   "first_folder": "family_5_mcs_3",
+   "folders": {
+    "family_5_mcs_3": 13,
+    "family_2_mcs_3": 12
+   },
+   "image_ids_first_last": [
+    33472,
+    33484
+   ],
+   "n_distinct_keys": 25
+  },
+  {
+   "seq": 9799,
+   "obj_id": 109,
+   "category_id": 112,
+   "first_folder": "low_pho_int",
+   "folders": {
+    "low_pho_int": 13,
+    "low_drv_ext": 12
+   },
+   "image_ids_first_last": [
+    53208,
+    53220
+   ],
+   "n_distinct_keys": 25
+  },
+  {
+   "seq": 9800,
+   "obj_id": 20,
+   "category_id": 138,
+   "first_folder": "low_drv_ext",
+   "folders": {
+    "low_drv_ext": 13,
+    "low_pho_int": 12
+   },
+   "image_ids_first_last": [
+    81886,
+    81898
+   ],
+   "n_distinct_keys": 25
+  },
+  {
+   "seq": 9801,
+   "obj_id": 21,
+   "category_id": 91,
+   "first_folder": "low_drv_ext",
+   "folders": {
+    "low_drv_ext": 13,
+    "low_pho_int": 12
+   },
+   "image_ids_first_last": [
+    81886,
+    81898
+   ],
+   "n_distinct_keys": 25
+  },
+  {
+   "seq": 9802,
+   "obj_id": 21,
+   "category_id": 91,
+   "first_folder": "low_drv_ext",
+   "folders": {
+    "low_drv_ext": 13,
+    "low_pho_int": 12
+   },
+   "image_ids_first_last": [
+    82077,
+    82089
+   ],
+   "n_distinct_keys": 25
+  },
+  {
+   "seq": 10370,
+   "obj_id": 7,
+   "category_id": 1,
+   "first_folder": "mph_hum_key_mcs1",
+   "folders": {
+    "mph_hum_key_mcs1": 13,
+    "mp_intro_mcs_8_a1_cc": 12
+   },
+   "image_ids_first_last": [
+    55861,
+    55873
+   ],
+   "n_distinct_keys": 25
+  },
+  {
+   "seq": 10371,
+   "obj_id": 7,
+   "category_id": 1,
+   "first_folder": "mph_hum_key_mcs1",
+   "folders": {
+    "mph_hum_key_mcs1": 13,
+    "mp_intro_mcs_8_a1_cc": 12
+   },
+   "image_ids_first_last": [
+    55886,
+    55898
+   ],
+   "n_distinct_keys": 25
+  },
+  {
+   "seq": 10372,
+   "obj_id": 7,
+   "category_id": 1,
+   "first_folder": "mp_intro_mcs_8_a1_cc",
+   "folders": {
+    "mp_intro_mcs_8_a1_cc": 13,
+    "mph_hum_key_mcs1": 12
+   },
+   "image_ids_first_last": [
+    83543,
+    83555
+   ],
+   "n_distinct_keys": 25
+  },
+  {
+   "seq": 10373,
+   "obj_id": 7,
+   "category_id": 1,
+   "first_folder": "mph_hum_key_mcs1",
+   "folders": {
+    "mph_hum_key_mcs1": 13,
+    "mp_intro_mcs_8_a1_cc": 12
+   },
+   "image_ids_first_last": [
+    55966,
+    55978
+   ],
+   "n_distinct_keys": 25
+  },
+  {
+   "seq": 10374,
+   "obj_id": 7,
+   "category_id": 1,
+   "first_folder": "mp_intro_mcs_8_a1_cc",
+   "folders": {
+    "mp_intro_mcs_8_a1_cc": 13,
+    "mph_hum_key_mcs1": 12
+   },
+   "image_ids_first_last": [
+    83610,
+    83622
+   ],
+   "n_distinct_keys": 25
+  },
+  {
+   "seq": 10375,
+   "obj_id": 7,
+   "category_id": 1,
+   "first_folder": "mph_hum_key_mcs1",
+   "folders": {
+    "mph_hum_key_mcs1": 13,
+    "mp_intro_mcs_8_a1_cc": 12
+   },
+   "image_ids_first_last": [
+    55991,
+    56003
+   ],
+   "n_distinct_keys": 25
+  },
+  {
+   "seq": 10376,
+   "obj_id": 7,
+   "category_id": 1,
+   "first_folder": "mph_hum_key_mcs1",
+   "folders": {
+    "mph_hum_key_mcs1": 13,
+    "mp_intro_mcs_8_a1_cc": 12
+   },
+   "image_ids_first_last": [
+    56010,
+    56022
+   ],
+   "n_distinct_keys": 25
+  },
+  {
+   "seq": 10377,
+   "obj_id": 7,
+   "category_id": 1,
+   "first_folder": "mp_intro_mcs_8_a1_cc",
+   "folders": {
+    "mp_intro_mcs_8_a1_cc": 13,
+    "mph_hum_key_mcs1": 12
+   },
+   "image_ids_first_last": [
+    83654,
+    83666
+   ],
+   "n_distinct_keys": 25
+  },
+  {
+   "seq": 10378,
+   "obj_id": 7,
+   "category_id": 1,
+   "first_folder": "mph_hum_key_mcs1",
+   "folders": {
+    "mph_hum_key_mcs1": 13,
+    "mp_intro_mcs_8_a1_cc": 12
+   },
+   "image_ids_first_last": [
+    56035,
+    56047
+   ],
+   "n_distinct_keys": 25
+  },
+  {
+   "seq": 10379,
+   "obj_id": 7,
+   "category_id": 1,
+   "first_folder": "mph_hum_key_mcs1",
+   "folders": {
+    "mph_hum_key_mcs1": 13,
+    "mp_intro_mcs_8_a1_cc": 12
+   },
+   "image_ids_first_last": [
+    56090,
+    56102
+   ],
+   "n_distinct_keys": 25
+  },
+  {
+   "seq": 10380,
+   "obj_id": 7,
+   "category_id": 1,
+   "first_folder": "mp_intro_mcs_8_a1_cc",
+   "folders": {
+    "mp_intro_mcs_8_a1_cc": 13,
+    "mph_hum_key_mcs1": 12
+   },
+   "image_ids_first_last": [
+    83734,
+    83746
+   ],
+   "n_distinct_keys": 25
+  },
+  {
+   "seq": 10381,
+   "obj_id": 139,
+   "category_id": 143,
+   "first_folder": "mph_hum_key_mcs1",
+   "folders": {
+    "mph_hum_key_mcs1": 13,
+    "mp_intro_mcs_8_a1_cc": 12
+   },
+   "image_ids_first_last": [
+    56115,
+    56127
+   ],
+   "n_distinct_keys": 25
+  },
+  {
+   "seq": 10382,
+   "obj_id": 7,
+   "category_id": 1,
+   "first_folder": "mph_hum_key_mcs1",
+   "folders": {
+    "mph_hum_key_mcs1": 13,
+    "mp_intro_mcs_8_a1_cc": 12
+   },
+   "image_ids_first_last": [
+    56115,
+    56127
+   ],
+   "n_distinct_keys": 25
+  },
+  {
+   "seq": 10383,
+   "obj_id": 7,
+   "category_id": 1,
+   "first_folder": "mph_hum_key_mcs1",
+   "folders": {
+    "mph_hum_key_mcs1": 13,
+    "mp_intro_mcs_8_a1_cc": 12
+   },
+   "image_ids_first_last": [
+    56130,
+    56142
+   ],
+   "n_distinct_keys": 25
+  },
+  {
+   "seq": 10384,
+   "obj_id": 7,
+   "category_id": 1,
+   "first_folder": "mp_intro_mcs_8_a1_cc",
+   "folders": {
+    "mp_intro_mcs_8_a1_cc": 13,
+    "mph_hum_key_mcs1": 12
+   },
+   "image_ids_first_last": [
+    83774,
+    83786
+   ],
+   "n_distinct_keys": 25
+  },
+  {
+   "seq": 10385,
+   "obj_id": 139,
+   "category_id": 143,
+   "first_folder": "mph_hum_key_mcs1",
+   "folders": {
+    "mph_hum_key_mcs1": 13,
+    "mp_intro_mcs_8_a1_cc": 12
+   },
+   "image_ids_first_last": [
+    56155,
+    56167
+   ],
+   "n_distinct_keys": 25
+  },
+  {
+   "seq": 10386,
+   "obj_id": 7,
+   "category_id": 1,
+   "first_folder": "mph_hum_key_mcs1",
+   "folders": {
+    "mph_hum_key_mcs1": 13,
+    "mp_intro_mcs_8_a1_cc": 12
+   },
+   "image_ids_first_last": [
+    56155,
+    56167
+   ],
+   "n_distinct_keys": 25
+  },
+  {
+   "seq": 10387,
+   "obj_id": 7,
+   "category_id": 1,
+   "first_folder": "mp_intro_mcs_8_a1_cc",
+   "folders": {
+    "mp_intro_mcs_8_a1_cc": 13,
+    "mph_hum_key_mcs1": 12
+   },
+   "image_ids_first_last": [
+    83813,
+    83825
+   ],
+   "n_distinct_keys": 25
+  },
+  {
+   "seq": 10388,
+   "obj_id": 7,
+   "category_id": 1,
+   "first_folder": "mph_hum_key_mcs1",
+   "folders": {
+    "mph_hum_key_mcs1": 13,
+    "mp_intro_mcs_8_a1_cc": 12
+   },
+   "image_ids_first_last": [
+    56194,
+    56206
+   ],
+   "n_distinct_keys": 25
+  },
+  {
+   "seq": 10389,
+   "obj_id": 7,
+   "category_id": 1,
+   "first_folder": "mph_hum_key_mcs1",
+   "folders": {
+    "mph_hum_key_mcs1": 13,
+    "mp_intro_mcs_8_a1_cc": 12
+   },
+   "image_ids_first_last": [
+    56242,
+    56254
+   ],
+   "n_distinct_keys": 25
+  },
+  {
+   "seq": 15413,
+   "obj_id": 1,
+   "category_id": 1,
+   "first_folder": "family_5_mcs_3",
+   "folders": {
+    "family_5_mcs_3": 13,
+    "family_2_mcs_3": 12
+   },
+   "image_ids_first_last": [
+    32953,
+    32965
+   ],
+   "n_distinct_keys": 25
+  },
+  {
+   "seq": 15414,
+   "obj_id": 1,
+   "category_id": 1,
+   "first_folder": "family_2_mcs_3",
+   "folders": {
+    "family_2_mcs_3": 13,
+    "family_5_mcs_3": 12
+   },
+   "image_ids_first_last": [
+    81225,
+    81237
+   ],
+   "n_distinct_keys": 25
+  },
+  {
+   "seq": 15415,
+   "obj_id": 1,
+   "category_id": 1,
+   "first_folder": "family_5_mcs_3",
+   "folders": {
+    "family_5_mcs_3": 13,
+    "family_2_mcs_3": 12
+   },
+   "image_ids_first_last": [
+    32978,
+    32990
+   ],
+   "n_distinct_keys": 25
+  },
+  {
+   "seq": 15416,
+   "obj_id": 1,
+   "category_id": 1,
+   "first_folder": "family_2_mcs_3",
+   "folders": {
+    "family_2_mcs_3": 13,
+    "family_5_mcs_3": 12
+   },
+   "image_ids_first_last": [
+    81250,
+    81262
+   ],
+   "n_distinct_keys": 25
+  },
+  {
+   "seq": 15417,
+   "obj_id": 1,
+   "category_id": 1,
+   "first_folder": "family_5_mcs_3",
+   "folders": {
+    "family_5_mcs_3": 13,
+    "family_2_mcs_3": 12
+   },
+   "image_ids_first_last": [
+    33008,
+    33020
+   ],
+   "n_distinct_keys": 25
+  },
+  {
+   "seq": 15418,
+   "obj_id": 1,
+   "category_id": 1,
+   "first_folder": "family_2_mcs_3",
+   "folders": {
+    "family_2_mcs_3": 13,
+    "family_5_mcs_3": 12
+   },
+   "image_ids_first_last": [
+    81280,
+    81292
+   ],
+   "n_distinct_keys": 25
+  },
+  {
+   "seq": 15419,
+   "obj_id": 1,
+   "category_id": 1,
+   "first_folder": "family_5_mcs_3",
+   "folders": {
+    "family_5_mcs_3": 13,
+    "family_2_mcs_3": 12
+   },
+   "image_ids_first_last": [
+    33033,
+    33045
+   ],
+   "n_distinct_keys": 25
+  },
+  {
+   "seq": 15420,
+   "obj_id": 1,
+   "category_id": 1,
+   "first_folder": "family_2_mcs_3",
+   "folders": {
+    "family_2_mcs_3": 13,
+    "family_5_mcs_3": 12
+   },
+   "image_ids_first_last": [
+    81305,
+    81317
+   ],
+   "n_distinct_keys": 25
+  },
+  {
+   "seq": 15421,
+   "obj_id": 1,
+   "category_id": 1,
+   "first_folder": "family_5_mcs_3",
+   "folders": {
+    "family_5_mcs_3": 13,
+    "family_2_mcs_3": 12
+   },
+   "image_ids_first_last": [
+    33058,
+    33070
+   ],
+   "n_distinct_keys": 25
+  },
+  {
+   "seq": 15422,
+   "obj_id": 1,
+   "category_id": 1,
+   "first_folder": "family_5_mcs_3",
+   "folders": {
+    "family_5_mcs_3": 13,
+    "family_2_mcs_3": 12
+   },
+   "image_ids_first_last": [
+    33073,
+    33085
+   ],
+   "n_distinct_keys": 25
+  },
+  {
+   "seq": 15423,
+   "obj_id": 5,
+   "category_id": 1,
+   "first_folder": "family_5_mcs_3",
+   "folders": {
+    "family_5_mcs_3": 13,
+    "family_2_mcs_3": 12
+   },
+   "image_ids_first_last": [
+    33073,
+    33085
+   ],
+   "n_distinct_keys": 25
+  },
+  {
+   "seq": 15424,
+   "obj_id": 1,
+   "category_id": 1,
+   "first_folder": "family_2_mcs_3",
+   "folders": {
+    "family_2_mcs_3": 13,
+    "family_5_mcs_3": 12
+   },
+   "image_ids_first_last": [
+    81345,
+    81357
+   ],
+   "n_distinct_keys": 25
+  },
+  {
+   "seq": 15425,
+   "obj_id": 5,
+   "category_id": 1,
+   "first_folder": "family_2_mcs_3",
+   "folders": {
+    "family_2_mcs_3": 13,
+    "family_5_mcs_3": 12
+   },
+   "image_ids_first_last": [
+    81345,
+    81357
+   ],
+   "n_distinct_keys": 25
+  },
+  {
+   "seq": 15426,
+   "obj_id": 1,
+   "category_id": 1,
+   "first_folder": "family_5_mcs_3",
+   "folders": {
+    "family_5_mcs_3": 13,
+    "family_2_mcs_3": 12
+   },
+   "image_ids_first_last": [
+    33098,
+    33110
+   ],
+   "n_distinct_keys": 25
+  },
+  {
+   "seq": 15427,
+   "obj_id": 5,
+   "category_id": 1,
+   "first_folder": "family_5_mcs_3",
+   "folders": {
+    "family_5_mcs_3": 13,
+    "family_2_mcs_3": 12
+   },
+   "image_ids_first_last": [
+    33098,
+    33110
+   ],
+   "n_distinct_keys": 25
+  },
+  {
+   "seq": 15428,
+   "obj_id": 1,
+   "category_id": 1,
+   "first_folder": "family_5_mcs_3",
+   "folders": {
+    "family_5_mcs_3": 13,
+    "family_2_mcs_3": 12
+   },
+   "image_ids_first_last": [
+    33115,
+    33127
+   ],
+   "n_distinct_keys": 25
+  },
+  {
+   "seq": 15429,
+   "obj_id": 40,
+   "category_id": 138,
+   "first_folder": "family_5_mcs_3",
+   "folders": {
+    "family_5_mcs_3": 13,
+    "family_2_mcs_3": 12
+   },
+   "image_ids_first_last": [
+    33134,
+    33146
+   ],
+   "n_distinct_keys": 25
+  },
+  {
+   "seq": 15430,
+   "obj_id": 1,
+   "category_id": 1,
+   "first_folder": "family_5_mcs_3",
+   "folders": {
+    "family_5_mcs_3": 13,
+    "family_2_mcs_3": 12
+   },
+   "image_ids_first_last": [
+    33134,
+    33146
+   ],
+   "n_distinct_keys": 25
+  },
+  {
+   "seq": 15431,
+   "obj_id": 1,
+   "category_id": 1,
+   "first_folder": "family_2_mcs_3",
+   "folders": {
+    "family_2_mcs_3": 13,
+    "family_5_mcs_3": 12
+   },
+   "image_ids_first_last": [
+    81406,
+    81418
+   ],
+   "n_distinct_keys": 25
+  },
+  {
+   "seq": 15432,
+   "obj_id": 1,
+   "category_id": 1,
+   "first_folder": "family_5_mcs_3",
+   "folders": {
+    "family_5_mcs_3": 13,
+    "family_2_mcs_3": 12
+   },
+   "image_ids_first_last": [
+    33159,
+    33171
+   ],
+   "n_distinct_keys": 25
+  },
+  {
+   "seq": 15433,
+   "obj_id": 5,
+   "category_id": 1,
+   "first_folder": "family_5_mcs_3",
+   "folders": {
+    "family_5_mcs_3": 13,
+    "family_2_mcs_3": 12
+   },
+   "image_ids_first_last": [
+    33159,
+    33171
+   ],
+   "n_distinct_keys": 25
+  },
+  {
+   "seq": 15434,
+   "obj_id": 5,
+   "category_id": 1,
+   "first_folder": "family_5_mcs_3",
+   "folders": {
+    "family_5_mcs_3": 13,
+    "family_2_mcs_3": 12
+   },
+   "image_ids_first_last": [
+    33173,
+    33185
+   ],
+   "n_distinct_keys": 25
+  },
+  {
+   "seq": 15435,
+   "obj_id": 1,
+   "category_id": 1,
+   "first_folder": "family_5_mcs_3",
+   "folders": {
+    "family_5_mcs_3": 13,
+    "family_2_mcs_3": 12
+   },
+   "image_ids_first_last": [
+    33229,
+    33241
+   ],
+   "n_distinct_keys": 25
+  },
+  {
+   "seq": 15436,
+   "obj_id": 1,
+   "category_id": 1,
+   "first_folder": "family_2_mcs_3",
+   "folders": {
+    "family_2_mcs_3": 13,
+    "family_5_mcs_3": 12
+   },
+   "image_ids_first_last": [
+    81501,
+    81513
+   ],
+   "n_distinct_keys": 25
+  },
+  {
+   "seq": 15437,
+   "obj_id": 1,
+   "category_id": 1,
+   "first_folder": "family_5_mcs_3",
+   "folders": {
+    "family_5_mcs_3": 13,
+    "family_2_mcs_3": 12
+   },
+   "image_ids_first_last": [
+    33254,
+    33266
+   ],
+   "n_distinct_keys": 25
+  },
+  {
+   "seq": 15438,
+   "obj_id": 1,
+   "category_id": 1,
+   "first_folder": "family_2_mcs_3",
+   "folders": {
+    "family_2_mcs_3": 13,
+    "family_5_mcs_3": 12
+   },
+   "image_ids_first_last": [
+    81526,
+    81538
+   ],
+   "n_distinct_keys": 25
+  },
+  {
+   "seq": 15439,
+   "obj_id": 1,
+   "category_id": 1,
+   "first_folder": "family_5_mcs_3",
+   "folders": {
+    "family_5_mcs_3": 13,
+    "family_2_mcs_3": 12
+   },
+   "image_ids_first_last": [
+    33279,
+    33291
+   ],
+   "n_distinct_keys": 25
+  },
+  {
+   "seq": 15440,
+   "obj_id": 1,
+   "category_id": 1,
+   "first_folder": "family_2_mcs_3",
+   "folders": {
+    "family_2_mcs_3": 13,
+    "family_5_mcs_3": 12
+   },
+   "image_ids_first_last": [
+    81551,
+    81563
+   ],
+   "n_distinct_keys": 25
+  },
+  {
+   "seq": 15441,
+   "obj_id": 1,
+   "category_id": 1,
+   "first_folder": "family_5_mcs_3",
+   "folders": {
+    "family_5_mcs_3": 13,
+    "family_2_mcs_3": 12
+   },
+   "image_ids_first_last": [
+    33304,
+    33316
+   ],
+   "n_distinct_keys": 25
+  },
+  {
+   "seq": 15442,
+   "obj_id": 1,
+   "category_id": 1,
+   "first_folder": "family_2_mcs_3",
+   "folders": {
+    "family_2_mcs_3": 13,
+    "family_5_mcs_3": 12
+   },
+   "image_ids_first_last": [
+    81576,
+    81588
+   ],
+   "n_distinct_keys": 25
+  },
+  {
+   "seq": 15443,
+   "obj_id": 1,
+   "category_id": 1,
+   "first_folder": "family_5_mcs_3",
+   "folders": {
+    "family_5_mcs_3": 13,
+    "family_2_mcs_3": 12
+   },
+   "image_ids_first_last": [
+    33337,
+    33349
+   ],
+   "n_distinct_keys": 25
+  },
+  {
+   "seq": 15444,
+   "obj_id": 1,
+   "category_id": 1,
+   "first_folder": "family_2_mcs_3",
+   "folders": {
+    "family_2_mcs_3": 13,
+    "family_5_mcs_3": 12
+   },
+   "image_ids_first_last": [
+    81609,
+    81621
+   ],
+   "n_distinct_keys": 25
+  },
+  {
+   "seq": 15445,
+   "obj_id": 1,
+   "category_id": 1,
+   "first_folder": "family_2_mcs_3",
+   "folders": {
+    "family_2_mcs_3": 13,
+    "family_5_mcs_3": 12
+   },
+   "image_ids_first_last": [
+    81634,
+    81646
+   ],
+   "n_distinct_keys": 25
+  },
+  {
+   "seq": 15446,
+   "obj_id": 1,
+   "category_id": 1,
+   "first_folder": "family_2_mcs_3",
+   "folders": {
+    "family_2_mcs_3": 13,
+    "family_5_mcs_3": 12
+   },
+   "image_ids_first_last": [
+    81703,
+    81715
+   ],
+   "n_distinct_keys": 25
+  },
+  {
+   "seq": 15447,
+   "obj_id": 1,
+   "category_id": 1,
+   "first_folder": "family_5_mcs_3",
+   "folders": {
+    "family_5_mcs_3": 13,
+    "family_2_mcs_3": 12
+   },
+   "image_ids_first_last": [
+    33456,
+    33468
+   ],
+   "n_distinct_keys": 25
+  },
+  {
+   "seq": 15448,
+   "obj_id": 1,
+   "category_id": 1,
+   "first_folder": "family_2_mcs_3",
+   "folders": {
+    "family_2_mcs_3": 13,
+    "family_5_mcs_3": 12
+   },
+   "image_ids_first_last": [
+    81728,
+    81740
+   ],
+   "n_distinct_keys": 25
+  },
+  {
+   "seq": 15449,
+   "obj_id": 109,
+   "category_id": 112,
+   "first_folder": "low_pho_int",
+   "folders": {
+    "low_pho_int": 13,
+    "low_drv_ext": 12
+   },
+   "image_ids_first_last": [
+    53202,
+    53214
+   ],
+   "n_distinct_keys": 25
+  },
+  {
+   "seq": 15450,
+   "obj_id": 21,
+   "category_id": 1,
+   "first_folder": "low_pho_int",
+   "folders": {
+    "low_pho_int": 13,
+    "low_drv_ext": 12
+   },
+   "image_ids_first_last": [
+    53271,
+    53283
+   ],
+   "n_distinct_keys": 25
+  },
+  {
+   "seq": 15451,
+   "obj_id": 21,
+   "category_id": 1,
+   "first_folder": "low_pho_int",
+   "folders": {
+    "low_pho_int": 13,
+    "low_drv_ext": 12
+   },
+   "image_ids_first_last": [
+    53461,
+    53473
+   ],
+   "n_distinct_keys": 25
+  },
+  {
+   "seq": 15600,
+   "obj_id": 7,
+   "category_id": 1,
+   "first_folder": "mph_hum_key_mcs1",
+   "folders": {
+    "mph_hum_key_mcs1": 13,
+    "mp_intro_mcs_8_a1_cc": 12
+   },
+   "image_ids_first_last": [
+    55861,
+    55873
+   ],
+   "n_distinct_keys": 25
+  },
+  {
+   "seq": 15601,
+   "obj_id": 7,
+   "category_id": 1,
+   "first_folder": "mph_hum_key_mcs1",
+   "folders": {
+    "mph_hum_key_mcs1": 13,
+    "mp_intro_mcs_8_a1_cc": 12
+   },
+   "image_ids_first_last": [
+    55886,
+    55898
+   ],
+   "n_distinct_keys": 25
+  },
+  {
+   "seq": 15602,
+   "obj_id": 7,
+   "category_id": 1,
+   "first_folder": "mph_hum_key_mcs1",
+   "folders": {
+    "mph_hum_key_mcs1": 13,
+    "mp_intro_mcs_8_a1_cc": 12
+   },
+   "image_ids_first_last": [
+    55911,
+    55923
+   ],
+   "n_distinct_keys": 25
+  },
+  {
+   "seq": 15603,
+   "obj_id": 7,
+   "category_id": 1,
+   "first_folder": "mp_intro_mcs_8_a1_cc",
+   "folders": {
+    "mp_intro_mcs_8_a1_cc": 13,
+    "mph_hum_key_mcs1": 12
+   },
+   "image_ids_first_last": [
+    83593,
+    83605
+   ],
+   "n_distinct_keys": 25
+  },
+  {
+   "seq": 15604,
+   "obj_id": 7,
+   "category_id": 1,
+   "first_folder": "mph_hum_key_mcs1",
+   "folders": {
+    "mph_hum_key_mcs1": 13,
+    "mp_intro_mcs_8_a1_cc": 12
+   },
+   "image_ids_first_last": [
+    55974,
+    55986
+   ],
+   "n_distinct_keys": 25
+  },
+  {
+   "seq": 15605,
+   "obj_id": 7,
+   "category_id": 1,
+   "first_folder": "mp_intro_mcs_8_a1_cc",
+   "folders": {
+    "mp_intro_mcs_8_a1_cc": 13,
+    "mph_hum_key_mcs1": 12
+   },
+   "image_ids_first_last": [
+    83618,
+    83630
+   ],
+   "n_distinct_keys": 25
+  },
+  {
+   "seq": 15606,
+   "obj_id": 7,
+   "category_id": 1,
+   "first_folder": "mph_hum_key_mcs1",
+   "folders": {
+    "mph_hum_key_mcs1": 13,
+    "mp_intro_mcs_8_a1_cc": 12
+   },
+   "image_ids_first_last": [
+    55999,
+    56011
+   ],
+   "n_distinct_keys": 25
+  },
+  {
+   "seq": 15607,
+   "obj_id": 7,
+   "category_id": 1,
+   "first_folder": "mp_intro_mcs_8_a1_cc",
+   "folders": {
+    "mp_intro_mcs_8_a1_cc": 13,
+    "mph_hum_key_mcs1": 12
+   },
+   "image_ids_first_last": [
+    83643,
+    83655
+   ],
+   "n_distinct_keys": 25
+  },
+  {
+   "seq": 15608,
+   "obj_id": 7,
+   "category_id": 1,
+   "first_folder": "mph_hum_key_mcs1",
+   "folders": {
+    "mph_hum_key_mcs1": 13,
+    "mp_intro_mcs_8_a1_cc": 12
+   },
+   "image_ids_first_last": [
+    56024,
+    56036
+   ],
+   "n_distinct_keys": 25
+  },
+  {
+   "seq": 15609,
+   "obj_id": 7,
+   "category_id": 1,
+   "first_folder": "mp_intro_mcs_8_a1_cc",
+   "folders": {
+    "mp_intro_mcs_8_a1_cc": 13,
+    "mph_hum_key_mcs1": 12
+   },
+   "image_ids_first_last": [
+    83668,
+    83680
+   ],
+   "n_distinct_keys": 25
+  },
+  {
+   "seq": 15610,
+   "obj_id": 7,
+   "category_id": 1,
+   "first_folder": "mp_intro_mcs_8_a1_cc",
+   "folders": {
+    "mp_intro_mcs_8_a1_cc": 13,
+    "mph_hum_key_mcs1": 12
+   },
+   "image_ids_first_last": [
+    83726,
+    83738
+   ],
+   "n_distinct_keys": 25
+  },
+  {
+   "seq": 15611,
+   "obj_id": 7,
+   "category_id": 1,
+   "first_folder": "mph_hum_key_mcs1",
+   "folders": {
+    "mph_hum_key_mcs1": 13,
+    "mp_intro_mcs_8_a1_cc": 12
+   },
+   "image_ids_first_last": [
+    56107,
+    56119
+   ],
+   "n_distinct_keys": 25
+  },
+  {
+   "seq": 15612,
+   "obj_id": 7,
+   "category_id": 1,
+   "first_folder": "mp_intro_mcs_8_a1_cc",
+   "folders": {
+    "mp_intro_mcs_8_a1_cc": 13,
+    "mph_hum_key_mcs1": 12
+   },
+   "image_ids_first_last": [
+    83751,
+    83763
+   ],
+   "n_distinct_keys": 25
+  },
+  {
+   "seq": 15613,
+   "obj_id": 7,
+   "category_id": 1,
+   "first_folder": "mph_hum_key_mcs1",
+   "folders": {
+    "mph_hum_key_mcs1": 13,
+    "mp_intro_mcs_8_a1_cc": 12
+   },
+   "image_ids_first_last": [
+    56132,
+    56144
+   ],
+   "n_distinct_keys": 25
+  },
+  {
+   "seq": 15614,
+   "obj_id": 7,
+   "category_id": 1,
+   "first_folder": "mp_intro_mcs_8_a1_cc",
+   "folders": {
+    "mp_intro_mcs_8_a1_cc": 13,
+    "mph_hum_key_mcs1": 12
+   },
+   "image_ids_first_last": [
+    83776,
+    83788
+   ],
+   "n_distinct_keys": 25
+  },
+  {
+   "seq": 15615,
+   "obj_id": 7,
+   "category_id": 1,
+   "first_folder": "mph_hum_key_mcs1",
+   "folders": {
+    "mph_hum_key_mcs1": 13,
+    "mp_intro_mcs_8_a1_cc": 12
+   },
+   "image_ids_first_last": [
+    56182,
+    56194
+   ],
+   "n_distinct_keys": 25
+  },
+  {
+   "seq": 15616,
+   "obj_id": 7,
+   "category_id": 1,
+   "first_folder": "mp_intro_mcs_8_a1_cc",
+   "folders": {
+    "mp_intro_mcs_8_a1_cc": 13,
+    "mph_hum_key_mcs1": 12
+   },
+   "image_ids_first_last": [
+    83826,
+    83838
+   ],
+   "n_distinct_keys": 25
+  },
+  {
+   "seq": 15617,
+   "obj_id": 7,
+   "category_id": 1,
+   "first_folder": "mph_hum_key_mcs1",
+   "folders": {
+    "mph_hum_key_mcs1": 13,
+    "mp_intro_mcs_8_a1_cc": 12
+   },
+   "image_ids_first_last": [
+    56232,
+    56244
+   ],
+   "n_distinct_keys": 25
+  },
+  {
+   "seq": 15618,
+   "obj_id": 7,
+   "category_id": 1,
+   "first_folder": "mp_intro_mcs_8_a1_cc",
+   "folders": {
+    "mp_intro_mcs_8_a1_cc": 13,
+    "mph_hum_key_mcs1": 12
+   },
+   "image_ids_first_last": [
+    83876,
+    83888
+   ],
+   "n_distinct_keys": 25
+  }
+ ],
+ "t_load_s": 6.2,
+ "t_total_s": 7.8,
+ "source": "diffusion_vas_sailvos_train.json (HF kaihuac/diffusion_vas_datasets)"
+}

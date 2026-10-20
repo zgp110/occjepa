@@ -1,0 +1,294 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>OccJEPA: Occlusion as Masking for Amodal Video Segmentation</title>
+    <meta name="description" content="OccJEPA treats the occluded part of an object as masked tokens and lets the pre-trained V-JEPA 2.1 predictor complete it: deterministic, 33.5x faster than diffusion, state of the art on SAIL-VOS and TAO-Amodal." />
+    <meta property="og:title" content="OccJEPA: Occlusion as Masking for Amodal Video Segmentation" />
+    <meta property="og:description" content="Occlusion as masking: a video world model's pre-trained predictor completes occluded objects in feature space." />
+    <meta name="theme-color" content="#e1eaf6" />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%2324508f'/%3E%3Crect x='7' y='7' width='18' height='18' rx='2' fill='none' stroke='%23e1eaf6' stroke-width='2.4'/%3E%3Crect x='15' y='15' width='10' height='10' fill='%23d9731a'/%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Serif:wght@500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" />
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
+      onload="renderMathInElement(document.body,{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false}]})"></script>
+    <link rel="stylesheet" href="assets/styles.css" />
+  </head>
+  <body>
+    <main id="top">
+      <!-- ============ Hero ============ -->
+      <section class="hero">
+        <div class="hero-inner">
+          <p class="eyebrow">OccJEPA</p>
+          <h1><span>Occlusion as Masking</span> for Amodal Video Segmentation</h1>
+          <p class="subtitle">
+            A video world model is pre-trained to predict what lies in masked regions of a clip. OccJEPA treats the hidden
+            part of an object as exactly such a region and lets the pre-trained V-JEPA&nbsp;2.1 predictor fill it in:
+            one deterministic model, 33.5&times; faster than diffusion, and more accurate.
+          </p>
+          <p class="venue-line"><span class="venue-badge">CVPR 2027 submission</span></p>
+          <div class="authors" aria-label="Authors">
+            <p class="author-list"><span class="author-line">Anonymous authors</span></p><p class="affiliations">CVPR 2027 submission · under double-blind review</p>
+          </div>
+          <div class="button-row" aria-label="Project links">
+            <span class="button button-disabled" title="available after review"><span class="button-icon"><svg viewBox="0 0 24 24"><path d="M6 2h9l5 5v13a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2Zm8 1.5V8h4.5L14 3.5Z"/></svg></span><span>Paper</span></span>
+<a class="button" href="#code"><span class="button-icon"><svg viewBox="0 0 24 24"><path d="M8.6 16.6 4 12l4.6-4.6L7.2 6 1.2 12l6 6 1.4-1.4Zm6.8 0L20 12l-4.6-4.6L16.8 6l6 6-6 6-1.4-1.4Z"/></svg></span><span>Code</span></a>
+<a class="button" href="#videos"><span class="button-icon"><svg viewBox="0 0 24 24"><path d="M4 5h11a2 2 0 0 1 2 2v2.5l4-2.5v10l-4-2.5V17a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2Z"/></svg></span><span>Videos</span></a>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ Teaser: framework ============ -->
+      <section class="teaser-section">
+        <div class="container">
+          <figure class="teaser">
+            <a href="assets/images/framework.webp" target="_blank" rel="noopener"><img src="assets/images/framework.webp" alt="Overall framework of OccJEPA" /></a>
+            <figcaption>
+              <strong>Overall framework of OccJEPA.</strong> The clip is cropped around the object's visible mask. Tokens
+              that the visible mask barely covers are dropped, as masked tokens are in pre-training; the frozen V-JEPA&nbsp;2.1
+              encoder (with one shared LoRA adapter) reads the kept tokens, and the pre-trained predictor \(P\) predicts the
+              features of the dropped ones. A light head decodes the observed and the filled features into amodal masks;
+              at test time a second pass re-crops objects whose predicted extent leaves the first crop.
+            </figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <!-- ============ Abstract ============ -->
+      <section class="section" id="abstract">
+        <div class="container text-grid">
+          <div>
+            <p class="section-kicker">Abstract</p>
+            <p class="statement">The hidden part of an object is a <em>masked region</em> of the video.</p>
+          </div>
+          <div class="prose">
+            <p>
+              Amodal video segmentation asks for the complete mask of an object in every frame, including the parts hidden
+              behind other objects. The best current methods generate these masks with fine-tuned video diffusion models,
+              which need many denoising steps and an extra depth network, and give a different answer for every sample.
+            </p>
+            <p>
+              Self-supervised video world models of the JEPA family are trained on a closely related task: predicting the
+              representation of masked space-time regions from the visible ones. We therefore treat <strong>occlusion as
+              masking</strong>. The tokens that the object's visible mask does not cover are dropped, the pre-trained
+              V-JEPA&nbsp;2.1 predictor fills them in, and a light head decodes the observed and predicted features into
+              amodal masks.
+            </p>
+            <p>
+              The resulting model, <strong>OccJEPA</strong>, is deterministic and 33.5&times; faster than the
+              diffusion-based state of the art, and more accurate on SAIL-VOS, on TAO-Amodal, including a held-out test
+              split (+4.00 AP<sub>50</sub>), and on Kubric. Controlled experiments trace the gain to the predictor's
+              pre-trained weights rather than to its capacity, for world models from 87M to 1.85B parameters.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ Key numbers ============ -->
+      <section class="section section-soft" id="highlights">
+        <div class="container">
+          <div class="section-heading">
+            <p class="section-kicker">Highlights</p>
+            <h2>Faster, deterministic, and more accurate</h2>
+          </div>
+          <div class="metric-grid">
+            <div class="metric-card"><strong>+4.00</strong><span>AP<sub>50</sub> over Diffusion-VAS on a held-out TAO-Amodal test split of 48,675 real-video frames (95% CI [+2.99, +5.03])</span></div>
+            <div class="metric-card"><strong>33.5&times;</strong><span>faster than Diffusion-VAS: 0.35&nbsp;s instead of 11.77&nbsp;s per object, 25&times; fewer FLOPs</span></div>
+            <div class="metric-card"><strong>+3.70</strong><span>occluded IoU over Diffusion-VAS on SAIL-VOS, scored on the same frames (43.68 vs. 39.98)</span></div>
+            <div class="metric-card"><strong>75%</strong><span>of the completion gain comes from the predictor's <em>pre-trained</em> weights (81% on TAO-Amodal)</span></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ Idea ============ -->
+      <section class="section" id="idea">
+        <div class="container">
+          <div class="split-figure">
+            <div>
+              <p class="section-kicker">Idea</p>
+              <h2>Occlusion is masking</h2>
+              <p class="section-note">
+                In pre-training, V-JEPA hides random space-time blocks of a clip and trains a predictor to infer their
+                features from the visible rest. Amodal completion asks the same question for one object: given its visible
+                part, what occupies the region we cannot see? OccJEPA masks exactly the tokens that the object's visible mask
+                does not cover and reuses the predictor with its pre-trained weights.
+              </p>
+              <div class="legend-row"><span class="chip chip-blue">encoder \(E\)</span><span class="chip chip-orange">predictor \(P\)</span><span class="chip chip-green">mask head \(H\)</span></div>
+            </div>
+            <figure class="wide-figure">
+              <a href="assets/images/concept.webp" target="_blank" rel="noopener"><img src="assets/images/concept.webp" alt="Background and concept of OccJEPA" /></a>
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ Method ============ -->
+      <section class="section section-soft" id="method">
+        <div class="container">
+          <div class="section-heading">
+            <p class="section-kicker">Method</p>
+            <h2>Three steps, one forward pass</h2>
+          </div>
+          <div class="method-flow">
+            <article>
+              <h3>Occlusion as masking</h3>
+              <p>Each tubelet token gets its visible-mask coverage \(\rho_i\). Tokens with \(\rho_i \ge \tau\) are kept as
+                 context, all others are dropped, whether they show the occluder or the background. No occluder mask, no depth.</p>
+            </article>
+            <article>
+              <h3>Latent completion</h3>
+              <p>The encoder reads the kept tokens and the pre-trained predictor fills the dropped positions; the same encoder
+                 also reads the full clip. Each token carries what the clip shows there and what the predictor infers.</p>
+            </article>
+            <article>
+              <h3>Mask decoding</h3>
+              <p>A light head with a high-resolution refiner decodes \([z;f]\), the RGB crop and the visible mask into amodal
+                 masks. At test time, a parameter-free second pass re-crops objects whose extent leaves the first crop.</p>
+            </article>
+          </div>
+          <div class="equation-panel">
+            <p class="equation-label">Masking by visibility and latent completion</p>
+            <div class="equation">
+              \[ \rho_i = \frac{1}{|V_i|}\sum_{p\in V_i} \tilde m(p), \qquad K=\{i:\rho_i\ge\tau\},\quad D=\{i:\rho_i<\tau\}, \]
+              \[ \hat z_D = P\big(E(x_K),\, D\big), \qquad f_i = \begin{cases}\hat z_i, & i\in D,\\ z_i, & i\in K.\end{cases} \]
+            </div>
+            <p class="equation-note">This is the pre-training computation of V-JEPA with one change: the masked set is defined
+              by the object's visibility instead of a random block mask.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ Videos ============ -->
+      <section class="section" id="videos">
+        <div class="container">
+          <div class="section-heading">
+            <p class="section-kicker">Video results</p>
+            <h2>Examples drawn by fixed rules, not hand-picked</h2>
+            <p class="section-note">
+              Every example comes from a selection rule written before rendering: random draws, the people examples of the
+              paper, our largest gain and our two largest losses. White: visible part of the predicted mask; magenta: the
+              completed hidden part; outline: the given visible mask.
+            </p>
+          </div>
+          <div class="tabs" role="tablist"><button type="button" role="tab" aria-selected="true" data-panel="vp-tao">Real videos (TAO-Amodal)</button><button type="button" role="tab" aria-selected="false" data-panel="vp-sailvos">SAIL-VOS</button><button type="button" role="tab" aria-selected="false" data-panel="vp-kubric">Kubric</button></div><div id="vp-tao" class="video-panel" role="tabpanel"><p class="table-note">Real videos annotated with amodal boxes; the 25 annotated frames are 1 s apart. Black box: ground truth; dashed: the method's box; values: box IoU.</p><figure class="video-card"><video src="assets/videos/tao_people_1017.mp4" poster="assets/videos/tao_people_1017.jpg" muted loop playsinline controls preload="metadata" data-autoplay></video><figcaption>TAO-Amodal (real video), sequence 1017: people under occlusion (random draw)</figcaption></figure><div class="thumbs"><button type="button" class="thumb" aria-pressed="true" data-src="assets/videos/tao_people_1017.mp4" data-poster="assets/videos/tao_people_1017.jpg" data-title="TAO-Amodal (real video), sequence 1017: people under occlusion (random draw)"><img src="assets/videos/tao_people_1017.jpg" alt="" loading="lazy" /><span>#1017 · people under occlusion</span></button><button type="button" class="thumb" aria-pressed="false" data-src="assets/videos/tao_people_460.mp4" data-poster="assets/videos/tao_people_460.jpg" data-title="TAO-Amodal (real video), sequence 460: people under occlusion (random draw)"><img src="assets/videos/tao_people_460.jpg" alt="" loading="lazy" /><span>#460 · people under occlusion</span></button><button type="button" class="thumb" aria-pressed="false" data-src="assets/videos/tao_random_1259.mp4" data-poster="assets/videos/tao_random_1259.jpg" data-title="TAO-Amodal (real video), sequence 1259: object leaves the frame (random draw)"><img src="assets/videos/tao_random_1259.jpg" alt="" loading="lazy" /><span>#1259 · object leaves the frame</span></button><button type="button" class="thumb" aria-pressed="false" data-src="assets/videos/tao_random_980.mp4" data-poster="assets/videos/tao_random_980.jpg" data-title="TAO-Amodal (real video), sequence 980: object leaves the frame (random draw)"><img src="assets/videos/tao_random_980.jpg" alt="" loading="lazy" /><span>#980 · object leaves the frame</span></button><button type="button" class="thumb" aria-pressed="false" data-src="assets/videos/tao_random_1168.mp4" data-poster="assets/videos/tao_random_1168.jpg" data-title="TAO-Amodal (real video), sequence 1168: in-frame occlusion (random draw)"><img src="assets/videos/tao_random_1168.jpg" alt="" loading="lazy" /><span>#1168 · in-frame occlusion</span></button><button type="button" class="thumb" aria-pressed="false" data-src="assets/videos/tao_random_904.mp4" data-poster="assets/videos/tao_random_904.jpg" data-title="TAO-Amodal (real video), sequence 904: in-frame occlusion (random draw)"><img src="assets/videos/tao_random_904.jpg" alt="" loading="lazy" /><span>#904 · in-frame occlusion</span></button><button type="button" class="thumb" aria-pressed="false" data-src="assets/videos/tao_teaser_380.mp4" data-poster="assets/videos/tao_teaser_380.jpg" data-title="TAO-Amodal (real video), sequence 380: people under occlusion (rule-based draw)"><img src="assets/videos/tao_teaser_380.jpg" alt="" loading="lazy" /><span>#380 · people under occlusion</span></button><button type="button" class="thumb" aria-pressed="false" data-src="assets/videos/tao_teaser_1353.mp4" data-poster="assets/videos/tao_teaser_1353.jpg" data-title="TAO-Amodal (real video), sequence 1353: people under occlusion (rule-based draw)"><img src="assets/videos/tao_teaser_1353.jpg" alt="" loading="lazy" /><span>#1353 · people under occlusion</span></button></div></div><div id="vp-sailvos" class="video-panel" role="tabpanel" hidden><p class="table-note">Synthetic videos with amodal masks; values: per-frame occluded IoU. Includes our largest gain and our two largest losses against Diffusion-VAS.</p><figure class="video-card"><video src="assets/videos/sailvos_people1_4775.mp4" poster="assets/videos/sailvos_people1_4775.jpg" muted loop playsinline controls preload="metadata" data-autoplay></video><figcaption>SAIL-VOS sequence 4775: people (random draw)</figcaption></figure><div class="thumbs"><button type="button" class="thumb" aria-pressed="true" data-src="assets/videos/sailvos_people1_4775.mp4" data-poster="assets/videos/sailvos_people1_4775.jpg" data-title="SAIL-VOS sequence 4775: people (random draw)"><img src="assets/videos/sailvos_people1_4775.jpg" alt="" loading="lazy" /><span>#4775 · people (random draw)</span></button><button type="button" class="thumb" aria-pressed="false" data-src="assets/videos/sailvos_people2_3985.mp4" data-poster="assets/videos/sailvos_people2_3985.jpg" data-title="SAIL-VOS sequence 3985: people (random draw)"><img src="assets/videos/sailvos_people2_3985.jpg" alt="" loading="lazy" /><span>#3985 · people (random draw)</span></button><button type="button" class="thumb" aria-pressed="false" data-src="assets/videos/sailvos_random1_3553.mp4" data-poster="assets/videos/sailvos_random1_3553.jpg" data-title="SAIL-VOS sequence 3553: random draw"><img src="assets/videos/sailvos_random1_3553.jpg" alt="" loading="lazy" /><span>#3553 · random draw</span></button><button type="button" class="thumb" aria-pressed="false" data-src="assets/videos/sailvos_random2_2892.mp4" data-poster="assets/videos/sailvos_random2_2892.jpg" data-title="SAIL-VOS sequence 2892: random draw"><img src="assets/videos/sailvos_random2_2892.jpg" alt="" loading="lazy" /><span>#2892 · random draw</span></button><button type="button" class="thumb" aria-pressed="false" data-src="assets/videos/sailvos_random3_4568.mp4" data-poster="assets/videos/sailvos_random3_4568.jpg" data-title="SAIL-VOS sequence 4568: random draw"><img src="assets/videos/sailvos_random3_4568.jpg" alt="" loading="lazy" /><span>#4568 · random draw</span></button><button type="button" class="thumb" aria-pressed="false" data-src="assets/videos/sailvos_win1_2065.mp4" data-poster="assets/videos/sailvos_win1_2065.jpg" data-title="SAIL-VOS sequence 2065: our largest gain"><img src="assets/videos/sailvos_win1_2065.jpg" alt="" loading="lazy" /><span>#2065 · our largest gain</span></button><button type="button" class="thumb" aria-pressed="false" data-src="assets/videos/sailvos_loss1_2704.mp4" data-poster="assets/videos/sailvos_loss1_2704.jpg" data-title="SAIL-VOS sequence 2704: our largest loss"><img src="assets/videos/sailvos_loss1_2704.jpg" alt="" loading="lazy" /><span>#2704 · our largest loss</span></button><button type="button" class="thumb" aria-pressed="false" data-src="assets/videos/sailvos_loss2_1683.mp4" data-poster="assets/videos/sailvos_loss2_1683.jpg" data-title="SAIL-VOS sequence 1683: our second largest loss"><img src="assets/videos/sailvos_loss2_1683.jpg" alt="" loading="lazy" /><span>#1683 · our second largest loss</span></button></div></div><div id="vp-kubric" class="video-panel" role="tabpanel" hidden><p class="table-note">Random draws from Kubric-Static and Kubric-Dynamic; Diffusion-VAS is run by us with the same inputs; values: per-frame occluded IoU.</p><figure class="video-card"><video src="assets/videos/kubric_static_311.mp4" poster="assets/videos/kubric_static_311.jpg" muted loop playsinline controls preload="metadata" data-autoplay></video><figcaption>Kubric-Static, instance 311: random draw</figcaption></figure><div class="thumbs"><button type="button" class="thumb" aria-pressed="true" data-src="assets/videos/kubric_static_311.mp4" data-poster="assets/videos/kubric_static_311.jpg" data-title="Kubric-Static, instance 311: random draw"><img src="assets/videos/kubric_static_311.jpg" alt="" loading="lazy" /><span>Kubric-Static #311</span></button><button type="button" class="thumb" aria-pressed="false" data-src="assets/videos/kubric_static_244.mp4" data-poster="assets/videos/kubric_static_244.jpg" data-title="Kubric-Static, instance 244: random draw"><img src="assets/videos/kubric_static_244.jpg" alt="" loading="lazy" /><span>Kubric-Static #244</span></button><button type="button" class="thumb" aria-pressed="false" data-src="assets/videos/kubric_dynamic_268.mp4" data-poster="assets/videos/kubric_dynamic_268.jpg" data-title="Kubric-Dynamic, instance 268: random draw"><img src="assets/videos/kubric_dynamic_268.jpg" alt="" loading="lazy" /><span>Kubric-Dynamic #268</span></button><button type="button" class="thumb" aria-pressed="false" data-src="assets/videos/kubric_dynamic_198.mp4" data-poster="assets/videos/kubric_dynamic_198.jpg" data-title="Kubric-Dynamic, instance 198: random draw"><img src="assets/videos/kubric_dynamic_198.jpg" alt="" loading="lazy" /><span>Kubric-Dynamic #198</span></button></div></div>
+        </div>
+      </section>
+
+      <!-- ============ Results ============ -->
+      <section class="section section-soft" id="results">
+        <div class="container">
+          <div class="section-heading">
+            <p class="section-kicker">Results</p>
+            <h2>State of the art on SAIL-VOS and TAO-Amodal</h2>
+            <p class="section-note">All methods take the ground-truth visible masks (Diffusion-VAS protocols); all are
+              zero-shot on the real videos of TAO-Amodal.</p>
+          </div>
+          <div class="table-card">
+            <p class="table-title">Comparison with the state of the art</p>
+            <div class="table-scroll"><table class="results lead2"><thead><tr><th></th><th></th><th class="grp" colspan="2">SAIL-VOS val</th><th class="grp" colspan="3">TAO-Amodal val</th></tr><tr><th>Method</th><th>Type</th><th>mIoU</th><th>mIoU<sub>occ</sub></th><th>AP<sub>25</sub></th><th>AP<sub>50</sub></th><th>AP<sub>75</sub></th></tr></thead><tbody>
+<tr><td>Visible mask</td><td>–</td><td>67.89</td><td>n/a</td><td>93.73</td><td>82.22</td><td>63.12</td></tr>
+<tr><td>Convex hull</td><td>–</td><td>63.18</td><td>27.54</td><td>93.73</td><td>82.22</td><td>63.12</td></tr>
+<tr><td>Convex hull (refined)</td><td>–</td><td>71.21</td><td>34.27</td><td>93.73</td><td>82.22</td><td>63.12</td></tr>
+<tr><td>PCNet-M</td><td>image</td><td>74.20</td><td>42.52</td><td>94.89</td><td>85.11</td><td>65.97</td></tr>
+<tr><td>AISFormer</td><td>image</td><td>73.51</td><td>39.16</td><td>95.45</td><td>81.93</td><td>59.84</td></tr>
+<tr><td>SDAmodal</td><td>image</td><td>72.73</td><td>41.26</td><td>94.43</td><td>83.60</td><td>63.06</td></tr>
+<tr><td>pix2gestalt</td><td>image</td><td>54.83</td><td>26.59</td><td>80.73</td><td>57.50</td><td>28.95</td></tr>
+<tr><td>VideoMAE</td><td>video</td><td>69.67</td><td>29.39</td><td>69.14</td><td>56.71</td><td>41.19</td></tr>
+<tr><td>3D-UNet</td><td>video</td><td>72.79</td><td>39.54</td><td>94.59</td><td>83.83</td><td>64.33</td></tr>
+<tr><td>Diffusion-VAS</td><td>video</td><td class="second">77.07</td><td class="best">55.12</td><td class="second">97.28</td><td class="second">89.25</td><td class="second">71.99</td></tr>
+<tr class="group"><td colspan="7">best of three samples, selected with the ground truth</td></tr>
+<tr><td>pix2gestalt, best of 3 †</td><td>image</td><td>60.79</td><td>33.76</td><td>91.80</td><td>71.19</td><td>38.80</td></tr>
+<tr><td>Diffusion-VAS, best of 3 †</td><td>video</td><td>79.23</td><td>59.69</td><td>98.31</td><td>92.46</td><td>77.48</td></tr>
+<tr class="ours"><td>OccJEPA (ours)</td><td>video</td><td class="best">78.60</td><td class="second">52.09</td><td class="best">98.68</td><td class="best">93.36</td><td class="best">76.84</td></tr>
+</tbody></table></div>
+            <p class="table-note">Rows other than ours are reported by Diffusion-VAS (CVPR 2025); ours is scored with the
+              official metric. Bold: best, underline: second best, excluding the rows selected with the ground truth (†).</p>
+          </div>
+          <div class="table-card">
+            <p class="table-title">Controlled comparison: same frames, same scorer, held-out test split</p>
+            <div class="table-scroll"><table class="results"><thead><tr><th></th><th class="grp">SAIL-VOS</th><th class="grp" colspan="2">TAO val</th><th class="grp" colspan="2">TAO test (held out)</th></tr><tr><th>Method</th><th>mIoU<sub>occ</sub><sup>fixed</sup></th><th>AP<sub>50</sub></th><th>AP<sub>75</sub></th><th>AP<sub>50</sub></th><th>AP<sub>75</sub></th></tr></thead><tbody>
+<tr><td>Visible mask</td><td>0.00</td><td>82.22</td><td>63.12</td><td>83.08</td><td>62.42</td></tr>
+<tr><td>Diffusion-VAS</td><td class="second">39.98</td><td class="second">89.25</td><td class="second">71.99</td><td class="second">88.99</td><td class="second">71.05</td></tr>
+<tr class="ours"><td>OccJEPA (ours)</td><td class="best">43.68</td><td class="best">93.36</td><td class="best">76.84</td><td class="best">92.99</td><td class="best">76.40</td></tr>
+<tr class="delta"><td>Δ vs. Diffusion-VAS (95% CI)</td><td>+3.70<br><span class="ci">[+1.38, +5.40]</span></td><td>+4.11<br><span class="ci">[+3.02, +5.21]</span></td><td>+4.85<br><span class="ci">[+3.39, +6.34]</span></td><td>+4.00<br><span class="ci">[+2.99, +5.03]</span></td><td>+5.35<br><span class="ci">[+4.15, +6.56]</span></td></tr>
+</tbody></table></div>
+            <p class="table-note">mIoU<sub>occ</sub><sup>fixed</sup>: occluded IoU on the fixed set of SAIL-VOS frames with an
+              occluded region, a miss counting as zero. The TAO-Amodal test split (48,675 frames, 772 videos) was never used
+              for any choice; Diffusion-VAS on test is its released checkpoint run by us. CIs: bootstrap over videos.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ Why it works ============ -->
+      <section class="section" id="analysis">
+        <div class="container">
+          <div class="section-heading">
+            <p class="section-kicker">Analysis</p>
+            <h2>The knowledge is in the pre-trained predictor</h2>
+            <p class="section-note">
+              Re-initialising the predictor costs most of the gain: with the pre-trained weights the completion module adds
+              +8.53 occluded IoU on SAIL-VOS and +3.93 AP<sub>50</sub> on TAO-Amodal, and 75% / 81% of
+              that comes from the weights. The gain holds for every world-model size, from ViT-B to ViT-G (+8.19 to +8.67 occluded IoU).
+            </p>
+          </div>
+          <figure class="wide-figure">
+            <a href="assets/images/features.webp" target="_blank" rel="noopener"><img src="assets/images/features.webp" alt="What the predictor fills in" /></a>
+            <figcaption><strong>What the predictor fills in.</strong> \(z\): the encoder on all tokens, so the hidden part shows the
+              occluder. \(f\): the encoder on the kept tokens and the predictor everywhere else. Inside the ground-truth amodal
+              outline, \(f\) continues the visible object behind the occluder; the released V-JEPA&nbsp;2.1 predictor already does
+              this in part without any training on amodal labels.</figcaption>
+          </figure>
+          <figure class="wide-figure spaced">
+            <a href="assets/images/analysis.webp" target="_blank" rel="noopener"><img src="assets/images/analysis.webp" alt="Accuracy, compute and occlusion" /></a>
+            <figcaption><strong>Accuracy, compute and occlusion.</strong> (a) Accuracy against inference FLOPs: the distilled
+              ViT-L world model needs 248&times; fewer FLOPs than Diffusion-VAS. (b, c) The margin is largest on heavily
+              occluded objects; on TAO-Amodal test frames with less than half of the object visible, OccJEPA improves
+              AP<sub>50</sub> by +29.44.</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <!-- ============ Code ============ -->
+      <section class="section section-soft" id="code">
+        <div class="container">
+          <div class="section-heading">
+            <p class="section-kicker">Code</p>
+            <h2>Training and evaluation code</h2>
+            <p class="section-note">The repository contains the model, training on SAIL-VOS and MOVi-D, inference with
+              re-crop, the evaluation protocols of SAIL-VOS, TAO-Amodal (including the held-out test split), MOVi and
+              Kubric, and the data preparation. With the released weights it reproduces the paper's predictions frame by
+              frame. <a href="#code">Repository</a>.</p>
+          </div>
+          <div class="code-card">
+            <p>Quick start</p>
+<pre><code><span class="c"># environment (Python 3.12, PyTorch 2.x with CUDA) and the official V-JEPA 2 code</span>
+git clone https://github.com/facebookresearch/vjepa2 third_party/vjepa2
+pip install -r requirements.txt &amp;&amp; pip install -e .
+<span class="c"># V-JEPA 2.1 ViT-G (Meta) and the OccJEPA weights</span>
+python scripts/download_weights.py
+<span class="c"># amodal masks for one object: its frames and its visible mask in every frame</span>
+python -m occjepa.demo --frames video/frames --visible video/visible_masks \
+    --ckpt weights/occjepa_vitG.pt --out out/ --video
+<span class="c"># evaluation (Diffusion-VAS protocols) and training</span>
+python -m occjepa.eval_tao --annot data/tao_amodal/test_seqs.json --track_ids data/tao_amodal/test_abs2rel.json \
+    --frames data/tao_amodal/frames --ckpt weights/occjepa_vitG.pt --out results/tao_test
+python -m occjepa.eval_sailvos --ckpt weights/occjepa_vitG.pt --out results/sailvos
+python -m occjepa.train --tag occjepa_vitG</code></pre>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container footer-inner">
+        <p>OccJEPA: Occlusion as Masking for Amodal Video Segmentation.</p>
+        <a href="#top">Back to top</a>
+      </div>
+    </footer>
+    <script src="assets/site.js"></script>
+  </body>
+</html>

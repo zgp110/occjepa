@@ -1,0 +1,9 @@
+__pycache__/
+*.pyc
+weights/
+data/
+cache/
+runs/
+results/
+third_party/
+*.egg-info/
