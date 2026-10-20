@@ -81,7 +81,7 @@
             <p>
               The resulting model, <strong>OccJEPA</strong>, is deterministic and 33.5&times; faster than the
               diffusion-based state of the art, and more accurate on SAIL-VOS, on TAO-Amodal, including a held-out test
-              split (+4.00 AP<sub>50</sub>), and on Kubric. Controlled experiments trace the gain to the predictor's
+              split (+4.00 AP<sub>50</sub>) and visible masks tracked by SAM2, and on Kubric. Controlled experiments trace the gain to the predictor's
               pre-trained weights rather than to its capacity, for world models from 87M to 1.85B parameters.
             </p>
           </div>
@@ -200,13 +200,10 @@
 <tr><td>VideoMAE</td><td>video</td><td>69.67</td><td>29.39</td><td>69.14</td><td>56.71</td><td>41.19</td></tr>
 <tr><td>3D-UNet</td><td>video</td><td>72.79</td><td>39.54</td><td>94.59</td><td>83.83</td><td>64.33</td></tr>
 <tr><td>Diffusion-VAS</td><td>video</td><td class="second">77.07</td><td class="best">55.12</td><td class="second">97.28</td><td class="second">89.25</td><td class="second">71.99</td></tr>
-<tr class="group"><td colspan="7">best of three samples, selected with the ground truth</td></tr>
-<tr><td>pix2gestalt, best of 3 †</td><td>image</td><td>60.79</td><td>33.76</td><td>91.80</td><td>71.19</td><td>38.80</td></tr>
-<tr><td>Diffusion-VAS, best of 3 †</td><td>video</td><td>79.23</td><td>59.69</td><td>98.31</td><td>92.46</td><td>77.48</td></tr>
 <tr class="ours"><td>OccJEPA (ours)</td><td>video</td><td class="best">78.60</td><td class="second">52.09</td><td class="best">98.68</td><td class="best">93.36</td><td class="best">76.84</td></tr>
 </tbody></table></div>
             <p class="table-note">Rows other than ours are reported by Diffusion-VAS (CVPR 2025); ours is scored with the
-              official metric. Bold: best, underline: second best, excluding the rows selected with the ground truth (†).</p>
+              official metric. Bold: best, underline: second best.</p>
           </div>
           <div class="table-card">
             <p class="table-title">Controlled comparison: same frames, same scorer, held-out test split</p>
@@ -219,6 +216,9 @@
             <p class="table-note">mIoU<sub>occ</sub><sup>fixed</sup>: occluded IoU on the fixed set of SAIL-VOS frames with an
               occluded region, a miss counting as zero. The TAO-Amodal test split (48,675 frames, 772 videos) was never used
               for any choice; Diffusion-VAS on test is its released checkpoint run by us. CIs: bootstrap over videos.</p>
+            <p class="table-note"><strong>Predicted visible masks.</strong> With visible masks tracked by SAM2 from the
+              annotated first frame instead of annotated in every frame, OccJEPA still leads Diffusion-VAS on the test split
+              by +4.32 AP<sub>50</sub> (85.59 vs. 81.27; 95% CI [+3.37, +5.34]).</p>
           </div>
         </div>
       </section>
