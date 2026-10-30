@@ -2,7 +2,7 @@
 
 A video world model is pre-trained to predict what lies in masked regions of a clip. OccJEPA treats the hidden part of
 an object as exactly such a region: the tokens that the object's visible mask does not cover are dropped, the
-pre-trained V-JEPA 2.1 predictor fills them in, and a light head decodes the observed and the predicted features into
+pre-trained V-JEPA 2.1 predictor fills them in, and a light mask decoder maps the observed and the predicted features into
 amodal masks. One deterministic model, 33.5x faster than diffusion-based amodal segmentation.
 
 Project page: `docs/` (served with GitHub Pages).
@@ -16,7 +16,7 @@ Project page: `docs/` (served with GitHub Pages).
 
 On the frames that both methods are scored on (occluded frames of SAIL-VOS, a miss counting as zero), OccJEPA reaches
 43.68 occluded IoU against 39.98. The TAO-Amodal test split (48,675 frames, built with
-`occjepa.build_tao_split`) was never used for any design choice.
+`occjepa.build_tao_split`) is held out.
 
 ## Installation
 
@@ -61,7 +61,7 @@ Kubric: `--data kubric_static|kubric_dynamic`, scored with the A counting.
 ```bash
 python -m occjepa.train --tag occjepa_vitG          # 6000 steps, batch 8, SAIL-VOS + MOVi-D (50/50)
 ```
-LoRA (rank 16) on the last 12 encoder blocks, the pre-trained predictor fine-tuned, a head with a high-resolution
+LoRA (rank 16) on the last 12 encoder blocks, the pre-trained predictor fine-tuned, a mask decoder with a high-resolution
 refiner; about 5 s per step on one GPU (8 h for 6000 steps). Variants of the paper's ablations: `--arm B2_lora_scr` (randomly initialised
 predictor), `--arm C_lora` (no predictor), `--world_model vitg`.
 
@@ -69,8 +69,8 @@ predictor), `--arm C_lora` (no predictor), `--world_model vitg`.
 
 | file | content |
 |---|---|
-| `occjepa/model.py` | OccJEPA: occlusion as masking, latent completion with the predictor, mask head |
-| `occjepa/layers.py` | mask head with refiner, LoRA, drop sets, predictor fill, token coverage |
+| `occjepa/model.py` | OccJEPA: occlusion as masking, latent completion with the predictor, mask decoder |
+| `occjepa/layers.py` | mask decoder with refiner, LoRA, drop sets, predictor fill, token coverage |
 | `occjepa/vjepa.py` | V-JEPA 2.1 loading (official code) and predictor forward on any token grid |
 | `occjepa/infer.py`, `tao.py` | two-pass inference (re-crop) on the padded canvas, Diffusion-VAS box metric |
 | `occjepa/data/` | SAIL-VOS crop caches, MOVi-D, the 50/50 training mixture, SAIL-VOS re-crop |
